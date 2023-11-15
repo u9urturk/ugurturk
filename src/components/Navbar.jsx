@@ -1,18 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfilePicture from '..//DevMaterials/xa.png'
+import classNames from 'classnames';
 export default function Navbar() {
     const logo = process.env.PUBLIC_URL + "logo.png"
+
+    const [scrollY, setScrollY] = useState(0);
+
+    const handleScroll = () => {
+        setScrollY(window.scrollY);
+      };
+
+
+
+      useEffect(() => {        
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []); 
     
+      console.log(scrollY)
     return (
-        <div className="navbar bg-transparent fixed z-40">
+        <div className={classNames({
+            "navbar bg-transparent transition-all hover:opacity-100 cursor-pointer  mt-4 fixed z-40":true,
+            "opacity-0":scrollY!=0,
+            
+        })}>
             <div className="flex-1">
                 <a className="btn btn-ghost normal-case font-serif text-xl">Uğur TÜRK</a>
             </div>
-            <div className='flex-1 font-serif gap-x-12'>
-                <a className='hover:scale-90 transition-all' href="">Hakkımda</a>
-                <a className='hover:scale-90 transition-all' href="">Beceriler</a>
-                <a className='hover:scale-90 transition-all' href="">Portfolyo</a>
-                <a className='hover:scale-90 transition-all' href="">İletişim</a>
+            <div className='flex-auto font-serif gap-x-12'>
+                <button className='hover:scale-90 transition-all  btn btn-outline' href="">Hakkımda</button>
+                <button className='hover:scale-90 transition-all  btn btn-outline' href="">Beceriler</button>
+                <button className='hover:scale-90 transition-all  btn btn-outline' href="">Portfolyo</button>
+                <button className='hover:scale-90 transition-all  btn btn-outline' href="">İletişim</button>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control">
