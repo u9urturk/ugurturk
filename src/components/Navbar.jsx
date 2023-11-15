@@ -30,10 +30,10 @@ export default function Navbar() {
                 <a className="btn btn-ghost normal-case font-serif text-xl">Uğur TÜRK</a>
             </div>
             <div className='flex-auto font-serif gap-x-12'>
-                <button className='hover:scale-90 transition-all  btn btn-outline' href="">Hakkımda</button>
-                <button className='hover:scale-90 transition-all  btn btn-outline' href="">Beceriler</button>
-                <button className='hover:scale-90 transition-all  btn btn-outline' href="">Portfolyo</button>
-                <button className='hover:scale-90 transition-all  btn btn-outline' href="">İletişim</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Hakkımda</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Beceriler</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Portfolyo</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">İletişim</button>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control">
