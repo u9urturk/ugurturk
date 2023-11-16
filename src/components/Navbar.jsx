@@ -18,12 +18,15 @@ export default function Navbar() {
           window.removeEventListener('scroll', handleScroll);
         };
       }, []); 
+<<<<<<< HEAD
 
 
       const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
         element.scrollIntoView({ behavior: 'smooth' });
       }
+=======
+>>>>>>> 1b3bc5097acb98181b8f11bf6ed337b5e04d2b53
     
       console.log(scrollY)
     return (
@@ -36,9 +39,15 @@ export default function Navbar() {
                 <a className="btn btn-ghost normal-case font-serif text-xl">Uğur TÜRK</a>
             </div>
             <div className='flex-auto font-serif gap-x-12'>
+<<<<<<< HEAD
                 <button onClick={() => scrollToSection("about")}  className='hover:scale-90 transition-all  btn btn-outline' href="">Hakkımda</button>
                 <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Beceriler</button>
                 <button onClick={() => scrollToSection("portfolyo")} className='hover:scale-90 transition-all  btn btn-outline' href="">Portfolyo</button>
+=======
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Hakkımda</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Beceriler</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline' href="">Portfolyo</button>
+>>>>>>> 1b3bc5097acb98181b8f11bf6ed337b5e04d2b53
                 <button  className='hover:scale-90 transition-all  btn btn-outline' href="">İletişim</button>
             </div>
             <div className="flex-none gap-2">
