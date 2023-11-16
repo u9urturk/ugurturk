@@ -3,11 +3,7 @@ import React from 'react'
 export default function Cards() {
     return (
         <>
-<<<<<<< HEAD
             <div id='portfolyo' className='flex flex-col items-center justify-center mt-32  gap-y-16'>
-=======
-            <div className='flex flex-col items-center justify-center mt-32  gap-y-16'>
->>>>>>> 1b3bc5097acb98181b8f11bf6ed337b5e04d2b53
                 <div className='flex items-center justify-center text-center'>
                     <h1 className='text-6xl font-semibold font-serif'>Portfolyo</h1>
                 </div>
