@@ -1,10 +1,10 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Carousel from './components/Carousel';
 import Cards from './components/Cards';
 import Footer from './components/Footer';
 import About from './components/About';
+import Skills from './components/Skills';
 
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
       <Navbar></Navbar>
       <Hero></Hero>    
       <About></About>
+      <Skills></Skills>
       <Cards></Cards>
       <Footer></Footer>
     </div>

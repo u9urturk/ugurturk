@@ -23,24 +23,52 @@ export default function Navbar() {
 
       const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
-        element.scrollIntoView({ behavior: 'smooth' });
+        const navbarHeight = document.getElementById('navbar').offsetHeight;
+        const scrollPosition = element.offsetTop - navbarHeight;
+        window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+          });
       }
 
+      const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    
+      const handleResize = () => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight
+        });
+      };
+    
+      useEffect(() => {
+        window.addEventListener('resize', handleResize);
+    
+        // Event listener'ı kaldır
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []); 
+
+      //console.log(windowSize)
 
     
-      console.log(scrollY)
+      //console.log(scrollY)
     return (
-        <div className={classNames({
-            "navbar bg-transparent transition-all gap-y-2 md:gap-y-0 flex-col md:flex-row flex items-center px-8 justify-between hover:opacity-100 cursor-pointer  mt-4 fixed z-40":true,
-            "opacity-0":scrollY!=0,
+        <div id='navbar' className={classNames({
+            "navbar bg-transparent transition-all gap-y-2 md:gap-y-0 flex-col md:flex-row flex items-center px-8 justify-between hover:opacity-100 cursor-pointer  md:mt-4 fixed z-40":true,
+            "opacity-0":scrollY!=0 && windowSize.width >= 768,
+            "backdrop-blur-2xl":scrollY!=0 && windowSize.width < 768,
             
         })}>
             <div className="flex items-center justify-center">
-                <a className="btn btn-ghost normal-case font-serif text-xl">Uğur TÜRK</a>
+                <a onClick={() => scrollToSection("hero")} className="btn btn-ghost normal-case font-serif text-xl">Uğur TÜRK</a>
             </div>
             <div className='flex items-center justify-center font-serif gap-x-2 md:gap-x-12'>
               <button onClick={() => scrollToSection("about")}  className='hover:scale-90 transition-all btn-xs md:btn-md btn btn-outline' href="">Hakkımda</button>
-                <button  className='hover:scale-90 transition-all  btn btn-outline btn-xs md:btn-md' href="">Beceriler</button>
+                <button  className='hover:scale-90 transition-all  btn btn-outline btn-xs md:btn-md' href="">Teknolojiler</button>
                 <button onClick={() => scrollToSection("portfolyo")} className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">Portfolyo</button>             
                 <button  className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">İletişim</button>
             </div>
