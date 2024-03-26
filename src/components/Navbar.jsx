@@ -68,7 +68,7 @@ export default function Navbar() {
             </div>
             <div className='flex items-center justify-center font-serif gap-x-2 md:gap-x-12'>
               <button onClick={() => scrollToSection("about")}  className='hover:scale-90 transition-all btn-xs md:btn-md btn btn-outline' href="">Hakkımda</button>
-                <button  className='hover:scale-90 transition-all  btn btn-outline btn-xs md:btn-md' href="">Teknolojiler</button>
+                <button onClick={() => scrollToSection("skills")}  className='hover:scale-90 transition-all  btn btn-outline btn-xs md:btn-md' href="">Teknolojiler</button>
                 <button onClick={() => scrollToSection("portfolyo")} className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">Portfolyo</button>             
                 <button  className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">İletişim</button>
             </div>
