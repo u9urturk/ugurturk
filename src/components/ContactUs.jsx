@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from "react-google-recaptcha";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,8 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function ContactUs() {
     const cm_background = process.env.PUBLIC_URL + "cm-background.jpeg"
     const [recaptchaValue, setRecaptchaValue] = useState(null);
-    const [warning, setWarning] = useState(false);
-
+    const [ip, setIp] = useState('');
     const notify = () => {
         toast.warn("Lütfen robot olmadığınızı doğrulayın.", {
             position: "top-center",
@@ -24,6 +23,25 @@ export default function ContactUs() {
 
         });
     };
+    const initialFormData = {
+        name: '',
+        mailaddress: '',
+        message: '',
+        ipAddress: ''
+    };
+    useEffect(() => {
+        // İsteği göndermeden önce, kullanmakta olduğunuz servisin kullanım koşullarını ve sınırlamalarını kontrol edin.
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => setFormData(prevState => ({
+                ...prevState,
+                ipAddress: data.ip
+            })))
+            .catch(error => {
+                console.error('Error fetching IP:', error);
+                // Hata durumunda işlemler
+            });
+    }, []);
 
 
     const divStyle = {
@@ -34,11 +52,7 @@ export default function ContactUs() {
         height: '400px',
         // İstediğiniz diğer stil bilgilerini buraya ekleyebilirsiniz
     };
-    const initialFormData = {
-        name: '',
-        mailaddress: '',
-        message: ''
-    };
+
 
     const [formData, setFormData] = useState(initialFormData);
 
@@ -54,19 +68,30 @@ export default function ContactUs() {
         setRecaptchaValue(value);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onModal = ()=>{
+        document.getElementById('my_modal_1').showModal()
+    }
 
-        if (!recaptchaValue) {
+    const checkSubmit = (e)=>{
+
+        e.preventDefault();
+         if (!recaptchaValue) {
             notify();
             return;
         }
+        onModal();
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+       
         console.log('Form Data Submitted: ', formData);
-        setFormData(initialFormData);
-        setRecaptchaValue(null);
         // Form verilerini işleyin veya sunucuya gönderin
     };
 
+    
+   
     const recaptchaRef = React.createRef();
 
 
@@ -74,7 +99,7 @@ export default function ContactUs() {
         <div id='contact' className='h-auto w-full flex flex-col items-center mt-32 justify-center  '>
             <div style={divStyle}></div>
 
-            <form onSubmit={handleSubmit} className='container flex py-32 rounded-3xl -translate-y-32 bg-gray-100 text-gray-900 flex-col items-center justify-center'>
+            <form onSubmit={checkSubmit} className='container flex py-32 rounded-3xl -translate-y-32 bg-gray-100 text-gray-900 flex-col items-center justify-center'>
                 <div className='font-bold text-5xl py-16'>İletişim</div>
                 <div className='w-[60%]'>
                     <div class="mb-4 w-full">
@@ -101,10 +126,27 @@ export default function ContactUs() {
                         />
 
                     </div>
-                    <button type="submit" class="block mt-2 mb-4 w-full rounded-full bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">Gönder</button>
+                    <button type='submit' class="block mt-2 mb-4 w-full rounded-full bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">Gönder</button>
                 </div>
             </form>
             <ToastContainer />
+            <dialog onSubmit={handleSubmit} id="my_modal_1" className="modal">
+                <div className="modal-box  w-11/12 max-w-5xl">
+                    <h3 className="font-bold text-lg">Lütfen Bilgileri Kontrol Edin</h3>
+                    <p className="py-4">Ad-Soyad : {formData.name}</p>
+                    <p className="py-4">E-Mail : {formData.mailaddress}</p>
+                    <p className="py-4">Mesaj : {formData.message}</p>
+                    <div className="modal-action">
+                        <form method="dialog " className='flex itemns-center justify-center gap-x-2'>
+                            {/* if there is a button in form, it will close the modal */}
+                            <button  className="btn "  type='button'>Kapat</button>
+                            <button className="btn btn-success" type='submit'>Gönder</button>
+                            
+                        </form>
+                       
+                    </div>
+                </div>
+            </dialog>
 
         </div>
 
