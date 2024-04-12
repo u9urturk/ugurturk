@@ -1,9 +1,29 @@
 import React, { useState } from 'react'
 import ReCAPTCHA from "react-google-recaptcha";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function ContactUs() {
     const cm_background = process.env.PUBLIC_URL + "cm-background.jpeg"
     const [recaptchaValue, setRecaptchaValue] = useState(null);
+    const [warning, setWarning] = useState(false);
+
+    const notify = () => {
+        toast.warn("Lütfen robot olmadığınızı doğrulayın.", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            // Animasyonu özelleştirebilirsiniz:
+            theme: "light"
+
+
+        });
+    };
 
 
     const divStyle = {
@@ -38,7 +58,7 @@ export default function ContactUs() {
         e.preventDefault();
 
         if (!recaptchaValue) {
-            alert('Please verify you are a human!');
+            notify();
             return;
         }
         console.log('Form Data Submitted: ', formData);
@@ -73,16 +93,19 @@ export default function ContactUs() {
                         <label for="622c61be-66f3-4751-bd65-df4e8ed2c68a"></label>
                         <textarea placeholder="Mesajınız" name='message' value={formData.message} onChange={handleChange} type="text" id="622c61be-66f3-4751-bd65-df4e8ed2c68a" rows="4" class="w-full block rounded-lg border dark:border-none dark:bg-neutral-600 py-[9px] px-3 pr-4 text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none"></textarea>
                     </div>
-                    <div className='w-full h-auto flex items-center justify-center py-2'>
+                    <div className='w-full h-auto flex  items-center justify-center md:justify-start py-'>
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             sitekey="6LfyL7kpAAAAAAn9E2kJBiEiq7JZWMtohrMVDXVh"
                             onChange={handleRecaptcha}
                         />
+
                     </div>
                     <button type="submit" class="block mt-2 mb-4 w-full rounded-full bg-blue-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-blue-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0">Gönder</button>
                 </div>
             </form>
+            <ToastContainer />
+
         </div>
 
 
