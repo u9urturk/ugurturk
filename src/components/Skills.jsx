@@ -61,10 +61,10 @@ export default function Skills() {
                 {
                     skillsData.map((skill, key) => {
                        return <div key={key} className="card relative  flex items-center justify-center w-auto h-[241px] max-h-[241px] max-w-[150px] shadow-2xl py-2 border-t-2 border-orange-600 cursor-pointer group">
-                            <figure><img src={skill.url} alt="java" /></figure>
-                            <div className="card-body absolute w-full  h-full flex flex-col items-center justify-center  md:hidden md:group-hover:block transition-all">
+                            <figure><img src={skill.url} alt={skill.name} /></figure>
+                            <div className="card-body absolute   w-full  h-full flex flex-col items-center justify-center  md:hidden md:group-hover:block transition-all">
                                 <h2 className="card-title flex items-center justify-center text-white text-4xl">{skill.name}</h2>
-                                <div className="card-actions mt-4 justify-center">
+                                <div className="card-actions mt-4 justify-center pt-16">
                                     <button className="btn btn-primary">İncele</button>
                                 </div>
                             </div>

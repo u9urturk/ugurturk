@@ -70,7 +70,7 @@ export default function Navbar() {
               <button onClick={() => scrollToSection("about")}  className='hover:scale-90 transition-all btn-xs md:btn-md btn btn-outline' href="">Hakkımda</button>
                 <button onClick={() => scrollToSection("skills")}  className='hover:scale-90 transition-all  btn btn-outline btn-xs md:btn-md' href="">Teknolojiler</button>
                 <button onClick={() => scrollToSection("portfolyo")} className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">Portfolyo</button>             
-                <button  className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">İletişim</button>
+                <button onClick={() => scrollToSection("contact")}  className='hover:scale-90 transition-all btn-xs md:btn-md  btn btn-outline' href="">İletişim</button>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control hidden">
