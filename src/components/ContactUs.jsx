@@ -7,9 +7,24 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function ContactUs() {
     const cm_background = process.env.PUBLIC_URL + "cm-background.jpeg"
     const [recaptchaValue, setRecaptchaValue] = useState(null);
-    const [ip, setIp] = useState('');
     const notify = () => {
         toast.warn("Lütfen robot olmadığınızı doğrulayın.", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            // Animasyonu özelleştirebilirsiniz:
+            theme: "light"
+
+
+        });
+    };
+
+    const success = () => {
+        toast.success("Bilgiler başarıyla gönderildi.", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -72,6 +87,14 @@ export default function ContactUs() {
         document.getElementById('my_modal_1').showModal()
     }
 
+    const handleClose= ()=>{
+        document.getElementById('my_modal_1').close()
+        setFormData(initialFormData);
+        setRecaptchaValue("null");
+        recaptchaRef.current.reset();
+        
+    }
+
     const checkSubmit = (e)=>{
 
         e.preventDefault();
@@ -84,9 +107,12 @@ export default function ContactUs() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-       
         console.log('Form Data Submitted: ', formData);
+        document.getElementById('my_modal_1').close()
+        setFormData(initialFormData);
+        setRecaptchaValue("null");
+        recaptchaRef.current.reset();
+        success();
         // Form verilerini işleyin veya sunucuya gönderin
     };
 
@@ -139,7 +165,7 @@ export default function ContactUs() {
                     <div className="modal-action">
                         <form method="dialog " className='flex itemns-center justify-center gap-x-2'>
                             {/* if there is a button in form, it will close the modal */}
-                            <button  className="btn "  type='button'>Kapat</button>
+                            <button  className="btn " onClick={handleClose} type='button' >Kapat</button>
                             <button className="btn btn-success" type='submit'>Gönder</button>
                             
                         </form>
